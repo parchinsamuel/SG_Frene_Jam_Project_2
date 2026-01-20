@@ -2,15 +2,25 @@ using UnityEngine;
 
 public class WorldMovement : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [Header("References")]
+
+    [SerializeField] private Transform centreRotation;
+    [SerializeField] private Rigidbody2D gravityRb;
+
+    [Header("Parameters")]
+
+    [SerializeField] private float rotateGravityUp;
+    [SerializeField] private float rotateGravityRight;
+    [SerializeField] private float rotateGravityLeft;
+
+    void Update()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    void ApplyNewGravity()
     {
+        Vector2 direction = (centreRotation.position - transform.position).normalized;
         
     }
 }
