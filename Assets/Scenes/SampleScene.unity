@@ -128,7 +128,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 38978752}
-  - component: {fileID: 38978753}
   m_Layer: 0
   m_Name: WorldView
   m_TagString: Untagged
@@ -153,21 +152,6 @@ Transform:
   - {fileID: 183994846}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &38978753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 38978751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0918e0ad6a67bce418fdf39483d69547, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gravityStrength: 20
-  gravityToRight: 1
-  playerTransform: {fileID: 1814428639}
 --- !u!1 &183994845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1142,7 +1126,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 32, y: 32, z: 1}
+  m_LocalScale: {x: 64, y: 64, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1829955338}
@@ -1296,6 +1280,7 @@ GameObject:
   - component: {fileID: 1814428639}
   - component: {fileID: 1814428638}
   - component: {fileID: 1814428642}
+  - component: {fileID: 1814428643}
   - component: {fileID: 1814428641}
   - component: {fileID: 1814428640}
   m_Layer: 0
@@ -1428,7 +1413,7 @@ Rigidbody2D:
   m_Mass: 2
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1458,6 +1443,21 @@ MonoBehaviour:
   jumpower: 28
   move: {x: 0, y: 0}
   jump: {x: 0, y: 0}
+--- !u!114 &1814428643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814428637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0918e0ad6a67bce418fdf39483d69547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  World: {fileID: 38978751}
+  gravityForce: 9.8
+  animationTurningWorld: 0.0001
 --- !u!1 &1823813917
 GameObject:
   m_ObjectHideFlags: 0

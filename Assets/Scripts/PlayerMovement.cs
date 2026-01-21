@@ -34,9 +34,7 @@ public class PlayerMovement : MonoBehaviour
             move.x += speed;
         }
 
-        
-
-        player.linearVelocity = transform.InverseTransformDirection(move);
+        player.linearVelocity = move;
     }
 
     void PlayerJump()

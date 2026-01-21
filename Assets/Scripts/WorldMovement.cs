@@ -1,48 +1,60 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
 
 public class WorldMovement : MonoBehaviour
 {
-    [SerializeField] private float gravityStrength;
-    [SerializeField] private bool gravityChange = true;
-    [SerializeField] Transform playerTransform;
+    [Header("Parameters")]
 
-    
-    void Update()
+    [Serialize] public GameObject World;
+
+
+
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            gravityChange = !gravityChange;
-
-            if (gravityChange)
-            {
-                Physics2D.gravity = new Vector2(gravityStrength, 0);
-                playerTransform.Rotate(Vector3.forward, 90);
-            }
-                
-            
+            StartCoroutine(ChangeGravity(0));
         }
 
-        if(Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            gravityChange = !gravityChange;
-
-            if (gravityChange)
-            {
-                Physics2D.gravity = new Vector2(-gravityStrength, 0);
-                playerTransform.Rotate(Vector3.forward, -90);
-            }
+            StartCoroutine(ChangeGravity(1));
         }
 
-        if(Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            gravityChange = !gravityChange;
+            StartCoroutine(ChangeGravity(2));
+        }
+    }
 
-            if (gravityChange)
+    public float animationTurningWorld;
+    IEnumerator ChangeGravity(int direction)
+    {
+        if (direction == 0)
+        {
+            for ( float i = 0; i < 90 ; i++)
             {
-                Physics2D.gravity = new Vector2(0, gravityStrength);
-                playerTransform.Rotate(Vector3.forward, 180);
+                yield return new WaitForSeconds(animationTurningWorld);
+                World.transform.RotateAround(transform.position, new Vector3(0, 0, 1), -1);
+                print (i);
             }
-            
+        }
+        else if (direction == 1)
+        {
+            for (int i = 0; i < 90; i++)
+            {
+                yield return new WaitForSeconds(animationTurningWorld);
+                World.transform.RotateAround(transform.position, new Vector3(0, 0, 1), 1);
+            }
+        }
+        else if (direction == 2)
+        {
+            for (int i = 0; i < 180; i++)
+            {
+                yield return new WaitForSeconds(animationTurningWorld * 2);
+                World.transform.RotateAround(transform.position, new Vector3(0, 0, 1), 1);
+            }
         }
     }
 }
