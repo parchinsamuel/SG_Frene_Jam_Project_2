@@ -4,8 +4,9 @@ public class WorldMovement : MonoBehaviour
 {
     [SerializeField] private float gravityStrength;
     [SerializeField] private bool gravityToRight = true;
+    [SerializeField] Transform playerTransform;
 
-    // Don't do what I Want TO CHANGE
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -13,7 +14,12 @@ public class WorldMovement : MonoBehaviour
             gravityToRight = !gravityToRight;
 
             if (gravityToRight)
+            {
                 Physics2D.gravity = new Vector2(gravityStrength, 0);
+                playerTransform.Rotate(Vector3.forward, 90);
+            }
+                
+            
         }
 
         if(Input.GetKeyDown(KeyCode.LeftArrow))
@@ -21,7 +27,22 @@ public class WorldMovement : MonoBehaviour
             gravityToRight = !gravityToRight;
 
             if (gravityToRight)
-                Physics2D.gravity = new Vector2(gravityStrength, 0);
+            {
+                Physics2D.gravity = new Vector2(-gravityStrength, 0);
+                playerTransform.Rotate(Vector3.forward, -90);
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            gravityToRight = !gravityToRight;
+
+            if (gravityToRight)
+            {
+                Physics2D.gravity = new Vector2(0, gravityStrength);
+                playerTransform.Rotate(Vector3.forward, 180);
+            }
+            
         }
     }
 }

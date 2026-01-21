@@ -165,11 +165,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0918e0ad6a67bce418fdf39483d69547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  centreRotation: {fileID: 0}
-  gravityRb: {fileID: 0}
-  rotateGravityUp: 0
-  rotateGravityRight: 0
-  rotateGravityLeft: 0
+  gravityStrength: 20
+  gravityToRight: 1
+  playerTransform: {fileID: 1814428639}
 --- !u!1 &183994845
 GameObject:
   m_ObjectHideFlags: 0

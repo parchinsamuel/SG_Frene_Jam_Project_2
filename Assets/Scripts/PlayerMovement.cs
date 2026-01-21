@@ -34,18 +34,21 @@ public class PlayerMovement : MonoBehaviour
             move.x += speed;
         }
 
-        player.linearVelocity = move;
+        
+
+        player.linearVelocity = transform.InverseTransformDirection(move);
     }
 
     void PlayerJump()
     {
-        jump = new Vector2(0f, player.linearVelocityY);
+        //jump = new Vector2(0f, player.linearVelocityY);
 
-        if (Input.GetKey(KeyCode.Space) && playerFeet.isGrounded)
-        {
-            CancelVelocity();
-            player.AddForce(Vector2.up * jumpower, ForceMode2D.Impulse);
-        }
+        //if (Input.GetKey(KeyCode.Space) && playerFeet.isGrounded)
+        //{
+        //    CancelVelocity();
+        //    var direction = transform.InverseTransformDirection(Vector2.up);
+        //    player.AddForce(direction * jumpower, ForceMode2D.Impulse);
+        //}
     }
 
     void CancelVelocity()
