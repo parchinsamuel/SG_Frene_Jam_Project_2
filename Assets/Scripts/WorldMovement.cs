@@ -2,25 +2,26 @@ using UnityEngine;
 
 public class WorldMovement : MonoBehaviour
 {
-    [Header("References")]
+    [SerializeField] private float gravityStrength;
+    [SerializeField] private bool gravityToRight = true;
 
-    [SerializeField] private Transform centreRotation;
-    [SerializeField] private Rigidbody2D gravityRb;
-
-    [Header("Parameters")]
-
-    [SerializeField] private float rotateGravityUp;
-    [SerializeField] private float rotateGravityRight;
-    [SerializeField] private float rotateGravityLeft;
-
+    // Don't do what I Want TO CHANGE
     void Update()
     {
-        
-    }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            gravityToRight = !gravityToRight;
 
-    void ApplyNewGravity()
-    {
-        Vector2 direction = (centreRotation.position - transform.position).normalized;
-        
+            if (gravityToRight)
+                Physics2D.gravity = new Vector2(gravityStrength, 0);
+        }
+
+        if(Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            gravityToRight = !gravityToRight;
+
+            if (gravityToRight)
+                Physics2D.gravity = new Vector2(gravityStrength, 0);
+        }
     }
 }
