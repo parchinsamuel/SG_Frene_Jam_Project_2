@@ -6,9 +6,7 @@ public class WorldMovement : MonoBehaviour
 {
     [Header("Parameters")]
 
-    [Serialize] public GameObject World;
-
-
+    [Serialize] private GameObject World;
 
     private void Update()
     {
@@ -33,16 +31,16 @@ public class WorldMovement : MonoBehaviour
     {
         if (direction == 0)
         {
-            for ( float i = 0; i < 90 ; i++)
+            for (float i = 0; i < 90; i++)
             {
                 yield return new WaitForSeconds(animationTurningWorld);
                 World.transform.RotateAround(transform.position, new Vector3(0, 0, 1), -1);
-                print (i);
+                print(i);
             }
         }
         else if (direction == 1)
         {
-            for (int i = 0; i < 90; i++)
+            for (float i = 0; i < 90; i++)
             {
                 yield return new WaitForSeconds(animationTurningWorld);
                 World.transform.RotateAround(transform.position, new Vector3(0, 0, 1), 1);
@@ -50,9 +48,9 @@ public class WorldMovement : MonoBehaviour
         }
         else if (direction == 2)
         {
-            for (int i = 0; i < 180; i++)
+            for (float i = 0; i < 180; i++)
             {
-                yield return new WaitForSeconds(animationTurningWorld * 2);
+                yield return new WaitForSeconds(animationTurningWorld);
                 World.transform.RotateAround(transform.position, new Vector3(0, 0, 1), 1);
             }
         }
