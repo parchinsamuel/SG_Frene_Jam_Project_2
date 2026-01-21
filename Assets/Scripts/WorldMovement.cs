@@ -3,7 +3,7 @@ using UnityEngine;
 public class WorldMovement : MonoBehaviour
 {
     [SerializeField] private float gravityStrength;
-    [SerializeField] private bool gravityToRight = true;
+    [SerializeField] private bool gravityChange = true;
     [SerializeField] Transform playerTransform;
 
     
@@ -11,9 +11,9 @@ public class WorldMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            gravityToRight = !gravityToRight;
+            gravityChange = !gravityChange;
 
-            if (gravityToRight)
+            if (gravityChange)
             {
                 Physics2D.gravity = new Vector2(gravityStrength, 0);
                 playerTransform.Rotate(Vector3.forward, 90);
@@ -24,9 +24,9 @@ public class WorldMovement : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            gravityToRight = !gravityToRight;
+            gravityChange = !gravityChange;
 
-            if (gravityToRight)
+            if (gravityChange)
             {
                 Physics2D.gravity = new Vector2(-gravityStrength, 0);
                 playerTransform.Rotate(Vector3.forward, -90);
@@ -35,9 +35,9 @@ public class WorldMovement : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.UpArrow))
         {
-            gravityToRight = !gravityToRight;
+            gravityChange = !gravityChange;
 
-            if (gravityToRight)
+            if (gravityChange)
             {
                 Physics2D.gravity = new Vector2(0, gravityStrength);
                 playerTransform.Rotate(Vector3.forward, 180);
