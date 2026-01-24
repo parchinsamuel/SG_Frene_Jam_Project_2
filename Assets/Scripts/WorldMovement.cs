@@ -5,54 +5,67 @@ using System.Collections;
 public class WorldMovement : MonoBehaviour
 {
     [Header("Parameters")]
+    [SerializeField] private GameObject World;
+    [SerializeField] private PlayerFeet playerFeet;
+    [SerializeField] private PlayerMovement playerMovement;
 
-    [Serialize] private GameObject World;
+    [SerializeField] public bool isWorldRotating { get; private set; }
+    public float animationTurningWorld;
 
     private void Update()
     {
+        if (isWorldRotating) return;
+
         if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
             StartCoroutine(ChangeGravity(0));
-        }
-
         if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
             StartCoroutine(ChangeGravity(1));
-        }
-
         if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
             StartCoroutine(ChangeGravity(2));
-        }
     }
 
-    public float animationTurningWorld;
     IEnumerator ChangeGravity(int direction)
     {
+        isWorldRotating = true;
+
+        // Désactive le collider des pieds pendant la rotation
+        playerFeet.feetCollider.enabled = false;
+        playerFeet.ResetGround();
+
+        // Boucle de rotation selon la direction
         if (direction == 0)
         {
-            for (float i = 0; i < 90; i++)
+            for (int i = 0; i < 90; i++)
             {
+                World.transform.RotateAround(transform.position, Vector3.forward, -1);
                 yield return new WaitForSeconds(animationTurningWorld);
-                World.transform.RotateAround(transform.position, new Vector3(0, 0, 1), -1);
-                print(i);
             }
         }
         else if (direction == 1)
         {
-            for (float i = 0; i < 90; i++)
+            for (int i = 0; i < 90; i++)
             {
+                World.transform.RotateAround(transform.position, Vector3.forward, 1);
                 yield return new WaitForSeconds(animationTurningWorld);
-                World.transform.RotateAround(transform.position, new Vector3(0, 0, 1), 1);
             }
         }
         else if (direction == 2)
         {
-            for (float i = 0; i < 180; i++)
+            for (int i = 0; i < 180; i++)
             {
+                World.transform.RotateAround(transform.position, Vector3.forward, 1);
                 yield return new WaitForSeconds(animationTurningWorld);
-                World.transform.RotateAround(transform.position, new Vector3(0, 0, 1), 1);
             }
         }
+
+        // Fin de rotation
+        isWorldRotating = false;
+
+        // Réactive le collider des pieds et reset les contacts
+        playerFeet.feetCollider.enabled = true;
+        playerFeet.ResetGround();
+        playerMovement.ForceToGround();
+
+        yield return new WaitForFixedUpdate(); // laisse Unity recalculer la physique
     }
 }

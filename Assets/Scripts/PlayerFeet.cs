@@ -3,22 +3,42 @@ using UnityEngine;
 public class PlayerFeet : MonoBehaviour
 {
     [Header("Parameters")]
+    [SerializeField] private WorldMovement world;
+    [SerializeField] public BoxCollider2D feetCollider;
 
-    [SerializeField] public bool isGrounded;
+    public bool isGrounded { get; private set; }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private int groundContacts;
+
+    private void Update()
     {
-        if (collision.CompareTag("Ground"))
+        if (!world.isWorldRotating)
         {
-            isGrounded = true;
+            isGrounded = groundContacts > 0;
+        }
+        else
+        {
+            isGrounded = false;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (collision.CompareTag("Ground"))
-        {
-            isGrounded = false;
-        }     
+        if (!col.CompareTag("Ground")) return;
+        groundContacts++;
+    }
+
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (!col.CompareTag("Ground")) return;
+        groundContacts--;
+        if (groundContacts < 0)
+            groundContacts = 0;
+    }
+
+    public void ResetGround()
+    {
+        groundContacts = 0;
+        isGrounded = false;
     }
 }
