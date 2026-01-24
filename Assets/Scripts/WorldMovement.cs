@@ -10,18 +10,26 @@ public class WorldMovement : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
 
     [SerializeField] public bool isWorldRotating { get; private set; }
-    public float animationTurningWorld;
+    [SerializeField] public float animationTurningWorld;
 
     private void Update()
     {
         if (isWorldRotating) return;
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
             StartCoroutine(ChangeGravity(0));
+        }
+            
         if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
             StartCoroutine(ChangeGravity(1));
+        }
+
         if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
             StartCoroutine(ChangeGravity(2));
+        }
     }
 
     IEnumerator ChangeGravity(int direction)
@@ -30,6 +38,7 @@ public class WorldMovement : MonoBehaviour
 
         // Désactive le collider des pieds pendant la rotation
         playerFeet.feetCollider.enabled = false;
+
         playerFeet.ResetGround();
 
         // Boucle de rotation selon la direction
