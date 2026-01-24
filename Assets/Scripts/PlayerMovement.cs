@@ -67,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
     void UpdateAirState()
     {
         if (!playerFeet.isGrounded)

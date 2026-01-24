@@ -9,24 +9,24 @@ public class WorldMovement : MonoBehaviour
     [SerializeField] private PlayerFeet playerFeet;
     [SerializeField] private PlayerMovement playerMovement;
 
-    [SerializeField] public bool isWorldRotating { get; private set; }
+    [SerializeField] public bool isWorldRotating { get; private set; } = false;
     [SerializeField] public float animationTurningWorld;
 
     private void Update()
     {
         if (isWorldRotating) return;
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow) && !isWorldRotating)
         {
             StartCoroutine(ChangeGravity(0));
         }
             
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && !isWorldRotating)
         {
             StartCoroutine(ChangeGravity(1));
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) && !isWorldRotating)
         {
             StartCoroutine(ChangeGravity(2));
         }
