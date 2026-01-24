@@ -15,13 +15,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector2 move;
     [SerializeField] private Vector2 jump;
 
-    [HideInInspector] public bool isrunning;
-    [HideInInspector] public bool isjumping;
-    [HideInInspector] public bool isfalling;
+    [SerializeField] public bool isrunning;
+    [SerializeField] public bool isjumping;
+    [SerializeField] public bool isfalling;
     void Update()
     {
         PlayerMove();
         PlayerJump();
+        UpdateAirState();
     }
 
     void PlayerMove()
@@ -49,8 +50,6 @@ public class PlayerMovement : MonoBehaviour
 
     void PlayerJump()
     {
-        isjumping = false;
-
         jump = new Vector2(0f, player.linearVelocityY);
 
         if (Input.GetKey(KeyCode.Space) && playerFeet.isGrounded)
@@ -69,6 +68,28 @@ public class PlayerMovement : MonoBehaviour
         if (playerFeet.isGrounded)
         {
             player.linearVelocityY = 0;
+        }
+    }
+
+    void UpdateAirState()
+    {
+        if (!playerFeet.isGrounded)
+        {
+            if (player.linearVelocityY > 0)
+            {
+                isjumping = true;
+                isfalling = false;
+            }
+            else
+            {
+                isjumping = false;
+                isfalling = true;
+            }
+        }
+        else
+        {
+            isjumping = false;
+            isfalling = false;
         }
     }
 }
