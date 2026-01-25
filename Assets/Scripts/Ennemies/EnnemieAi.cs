@@ -2,12 +2,15 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    public float speed = 3f;
+    private float speed;
+    public float min_speed;
+    public float max_speed;
     private Transform player;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        speed = Random.Range(min_speed, max_speed);
     }
 
     void Update()
